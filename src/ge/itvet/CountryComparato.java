@@ -14,16 +14,16 @@ interface CountryComparator {
     class Byarea implements Comparator<Country> {
         @Override
         public int compare(Country c, Country c1) {
-            {
-                return c.area.compareTo(c1.area);
+            return Integer.compare(c1.area, c.area);
         }
+
     }
+
 
     class Bypopulation implements Comparator<Country> {
         @Override
         public int compare(Country c, Country c1) {
-            {
-                return c.population.compareTo(c1.population);
+            return Double.compare(c.population, c1.population);
         }
     }
-}}}
+}

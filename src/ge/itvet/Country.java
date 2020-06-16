@@ -3,11 +3,11 @@ package ge.itvet;
 import java.util.List;
 
 public class Country  {
-    public final String population;
-    public final String area;
+    public final int population;
+    public final int area;
     public final String name;
 
-    public Country(String name,String population, String area) {
+    public Country(String name,int population, int area) {
         this.name = name;
         this.population = population;
          this.area = area;
@@ -18,10 +18,18 @@ public class Country  {
         return "Country{" +
                 "population=" + population +
                 ", area=" + area +
-                ", name: '" + name +
-                '}';
+                ", name: " + name +
+                '}'+"\n";
     }
-
+    public static int strToInt( String str ) {
+        int i = 1;
+        int num = 0;
+        while (i < str.length()) {
+            num *= 10;
+            num += str.charAt(i++) - '0';
+        }
+        return num;
+    }
 
 
 }
