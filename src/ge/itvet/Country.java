@@ -1,22 +1,24 @@
 package ge.itvet;
 
+import java.util.List;
+
 public class Country  {
-    public final int population;
-    public final double area;
+    public final String population;
+    public final String area;
     public final String name;
 
-    public Country(int population, double area, String name) {
-    this.population = population;
-    this.area = area;
-    this.name = name;
-    }
+    public Country(String name,String population, String area) {
+        this.name = name;
+        this.population = population;
+         this.area = area;
 
+    }
     @Override
     public String toString() {
         return "Country{" +
                 "population=" + population +
                 ", area=" + area +
-                ", name: '" + name   + '\'' +
+                ", name: '" + name +
                 '}';
     }
 
