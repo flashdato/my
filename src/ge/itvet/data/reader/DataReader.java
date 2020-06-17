@@ -1,5 +1,7 @@
 package ge.itvet.data.reader;
 
+import ge.itvet.exception.ConvertException;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -18,7 +20,7 @@ public class DataReader {
      * @return ამოკიხული ობიექტების სია.
      * @throws IOException
      */
-    public static <T> List<T> readSCVData(String filePath, DataConverter<T, String> converter) throws IOException {
+    public static <T> List<T> readSCVData(String filePath, DataConverter<T, String> converter) throws IOException, ConvertException {
 
         // შევქმენი ფაილის წასაკითხად სკანერი.
         Scanner scanner = new Scanner(new File(filePath), StandardCharsets.UTF_8);
@@ -39,6 +41,6 @@ public class DataReader {
     }
 
     public interface DataConverter<T, F> {
-        T convert(F value);
+        T convert(F value) throws ConvertException;
     }
 }

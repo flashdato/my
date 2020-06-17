@@ -3,6 +3,7 @@ package ge.itvet;
 import ge.itvet.data.model.Country;
 import ge.itvet.data.reader.CommaSeparatedStringToCountryConverter;
 import ge.itvet.data.reader.DataReader;
+import ge.itvet.exception.ConvertException;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,7 +13,6 @@ import java.util.Scanner;
 
 public class Main {
     private static final String filePath = "D:\\Games\\country.csv";
-
 
     public static void main(String[] args) throws Exception {
         method1();
@@ -37,7 +37,13 @@ public class Main {
     }
 
     private static void method1() throws Exception {
-        List<Country> countries = DataReader.readSCVData(filePath, new CommaSeparatedStringToCountryConverter());
+        List<Country> countries;
+        try {
+            countries = DataReader.readSCVData(filePath, new CommaSeparatedStringToCountryConverter());
+        } catch (ConvertException e) {
+            System.err.println(e.getMessage());
+            return;
+        }
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("რომელი ველის მიხედვით გსურს რომ დავალაგო ქვეყნები?  (შემოიტანეთ რიცხვი)");
