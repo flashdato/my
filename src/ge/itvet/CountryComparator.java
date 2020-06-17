@@ -4,7 +4,7 @@ import ge.itvet.data.model.Country;
 
 import java.util.Comparator;
 
-interface CountryComparator {
+public interface CountryComparator {
 
     class ByName implements Comparator<Country> {
         @Override
