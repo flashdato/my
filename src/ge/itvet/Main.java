@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private static final String filePath = "/home/mikheil/Downloads/itvet/country.csv";
+    private static final String filePath = "D:\\Games\\country.csv";
 
 
     public static void main(String[] args) throws Exception {
