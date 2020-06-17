@@ -1,63 +1,65 @@
 package ge.itvet;
-import java.io.BufferedReader;
-import java.io.FileReader;
+
+import ge.itvet.data.model.Country;
+import ge.itvet.data.reader.CommaSeparatedStringToCountryConverter;
+import ge.itvet.data.reader.DataReader;
+
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
-import static ge.itvet.Country.strToInt;
-
-public class Main{
+public class Main {
+    private static final String filePath = "/home/mikheil/Downloads/itvet/country.csv";
 
 
     public static void main(String[] args) throws Exception {
-        int i=0;
+        method1();
+    }
+
+    private static void method2() throws Exception {
+        Scanner scanner = new Scanner(new File(filePath));
+        scanner.useDelimiter("((,)|(\n))");
+        if (scanner.hasNext()) scanner.nextLine();
+        Collection<Country> countries = new ArrayList<>();
+        while (scanner.hasNext()) {
+            String name = scanner.next().trim();
+            String population = scanner.next().trim();
+            String area = scanner.next().trim();
+            if (name.length() + population.length() + area.length() == 0) break;
+            if (population.length() == 0) population = "0";
+            if (area.length() == 0) area = "0";
+            countries.add(new Country(name, Integer.parseInt(population), Integer.parseInt(area)));
+        }
+        System.out.println(countries);
+
+    }
+
+    private static void method1() throws Exception {
+        List<Country> countries = DataReader.readSCVData(filePath, new CommaSeparatedStringToCountryConverter());
+
         Scanner scanner = new Scanner(System.in);
-        String file = "D:\\Games\\country.csv";
-        String delimiter = ",";
-        String line;
-        List<Country> countries = new ArrayList<>();
-        List Test = new ArrayList();
-        BufferedReader br = new BufferedReader(new FileReader(file));
-            while((line = br.readLine()) != null){
-                List values = Arrays.asList(line.split(delimiter));
-                Test.add(values);
-            }
-        Scanner sc = new Scanner(String.valueOf(Test.get(0)));
-        sc.useDelimiter("[,\\]\\[\n]\\[]");
-          while (i<11) {
-              sc = new Scanner(String.valueOf(Test.get(i++)));
-              sc.useDelimiter("[,\\]\\[]");
-              countries.add(new Country(sc.next(),strToInt(sc.next()),strToInt(sc.next())));
-          }
+        System.out.println("რომელი ველის მიხედვით გსურს რომ დავალაგო ქვეყნები?  (შემოიტანეთ რიცხვი)");
+        System.out.println("1. სახელის მიხედვით");
+        System.out.println("2. ფართობის მიხედვით");
+        System.out.println("3. მოსახლეობის მიხედვით");
 
-        System.out.println("რომელი ველის მიხედვით გსურს რომ დავალაგო ქვეყნები?  (შემოიტანეთ რიცხვი)\"\n" +
-                "1. სახელის მიხედვით\n" +
-                "2. ფართობის მიხედვით\n" +
-                "3. მოსახლეობის მიხედვით");
+        // თუმცა აქ შეიძლებოდა შენი უ-else-ო if-ები დაგვეტოვა.
         Integer a = scanner.nextInt();
-        if(a==1)
-        {
-        CountryComparator.Byname byname = new CountryComparator.Byname();
-        countries.sort(byname);
-        System.out.print(countries.toString());
+        switch (scanner.nextInt()) {
+            case 1:
+                countries.sort((c1, c2) -> c2.name.compareTo(c1.name));
+                break;
+            case 2:
+                countries.sort((c1, c2) -> c2.area - c1.area);
+                break;
+            case 3:
+                countries.sort((c1, c2) -> c2.population - c1.population);
+                break;
+            default:
+                System.out.println("try again !!!");
         }
-        if (a == 2)
-        {
-        CountryComparator.Byarea byarea = new CountryComparator.Byarea();
-        countries.sort(byarea);
-        System.out.print(countries.toString());
-        }
-        if (a==3)
-        {
-        CountryComparator.Bypopulation bypopulation = new CountryComparator.Bypopulation();
-        countries.sort(bypopulation);
-        System.out.print(countries.toString());
-        }
-        if(a!= 1 && a !=2 && a !=3 )
-            System.out.println("try again !!!");
-
-    }}
-
+    }
+}
 
