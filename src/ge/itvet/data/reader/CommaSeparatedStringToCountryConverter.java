@@ -1,7 +1,6 @@
 package ge.itvet.data.reader;
 
 import ge.itvet.data.model.Country;
-import ge.itvet.exception.ConvertException;
 import ge.itvet.exception.InvalidDataException;
 
 public class CommaSeparatedStringToCountryConverter implements DataReader.DataConverter<Country, String> {
@@ -20,7 +19,7 @@ public class CommaSeparatedStringToCountryConverter implements DataReader.DataCo
         აქ შემიძლია Exception-ის გამოყენება, მაგრამ რადგან ჯერ არ გაგვივლია, ამიტომ, ამას დავჯერდი.
          */
         if (split.length != 3)
-            throw new InvalidDataException("split.length != 3 " + value );
+            throw new InvalidDataException("split.length != 3 " + value);
 
         return new Country(split[0].trim(), Integer.parseInt(split[1].trim()), Integer.parseInt(split[2].trim()));
     }
