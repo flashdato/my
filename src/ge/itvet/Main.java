@@ -46,7 +46,6 @@ public class Main {
         System.out.println("3. მოსახლეობის მიხედვით");
 
         // თუმცა აქ შეიძლებოდა შენი უ-else-ო if-ები დაგვეტოვა.
-        Integer a = scanner.nextInt();
         switch (scanner.nextInt()) {
             case 1:
                 countries.sort((c1, c2) -> c2.name.compareTo(c1.name));
