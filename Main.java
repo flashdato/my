@@ -1,5 +1,3 @@
-package ge.itvet;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,12 +9,11 @@ public class Main {
         MyPanel myPanel = new MyPanel();
         JFrame jframe = new JFrame();
         jframe.add(myPanel);
-        jframe.setSize(180,300);
+        jframe.pack();
         jframe.setTitle("TicTacToe");
         jframe.doLayout();
         jframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        jframe.setResizable(false);
+        jframe.setResizable(true);
         jframe.setVisible(true);
     }
 }
-
